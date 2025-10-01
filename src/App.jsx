@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, useNavigate } from "react-router-dom";
+import PasswordPage from "./components/PasswordPage";
+import Page1 from "./components/Page1";
+import Page2 from "./components/Page2";
+import Page3 from "./components/Page3";
+import Page4 from "./components/Page4";
+import Dashboard from "./components/Dashboard";
+import Games from "./components/Games";
+import Playlist from "./components/Playlist";
+import About from "./components/About";
+import Kenangan from "./components/Kenangan"; // ✨ halaman foto
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const navigate = useNavigate();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Routes>
+      <Route path="/" element={<PasswordPage onNext={() => navigate("/page1")} />} />
+      <Route path="/page1" element={<Page1 onNext={() => navigate("/page2")} />} />
+      <Route path="/page2" element={<Page2 onNext={() => navigate("/page3")} />} />
+      <Route path="/page3" element={<Page3 onNext={() => navigate("/intro")} />} />
+      <Route path="/intro" element={<Page4 goDashboard={() => navigate("/dashboard")} />} />
+      <Route path="/dashboard" element={<Dashboard />} />
 
-export default App
+      {/* Menu dari Dashboard */}
+      <Route path="/games" element={<Games />} />
+      <Route path="/playlist" element={<Playlist />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/kenangan" element={<Kenangan />} />
+    </Routes>
+  );
+}

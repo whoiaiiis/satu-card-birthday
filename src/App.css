@@ -1,42 +1,240 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* ============ GLOBAL ============ */
+:root {
+  --bg: #fffafc;
+  --primary: #ff4f81;
+  --secondary: #ff9fba;
+  --accent: #ff3366;
+  --text: #333;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body.dark {
+  --bg: #1e1e2f;
+  --primary: #ff4f81;
+  --secondary: #ff7597;
+  --accent: #ff99bb;
+  --text: #f2f2f2;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* ============ LAYOUT ============ */
+.page {
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============ BUTTONS ============ */
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: 0.2s;
+}
+
+.btn-main {
+  background: var(--primary);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  margin: 8px;
+}
+
+.btn-main:hover {
+  background: var(--accent);
+}
+
+.btn-secondary {
+  background: #eee;
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+body.dark .btn-secondary {
+  background: #2a2a40;
+}
+
+.btn-secondary:hover {
+  background: #ddd;
+}
+
+body.dark .btn-secondary:hover {
+  background: #3a3a55;
+}
+
+.btn-back {
+  background: none;
+  color: var(--accent);
+  border: none;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+/* ============ CARDS & CONTAINERS ============ */
 .card {
-  padding: 2em;
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 12px 0;
 }
 
-.read-the-docs {
-  color: #888;
+body.dark .card {
+  background: #2a2a40;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* ============ DASHBOARD FOLDERS ============ */
+.folder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff;
+  transition: transform 0.2s;
+}
+
+body.dark .folder {
+  background: #2a2a40;
+}
+
+.folder img {
+  width: 60px;
+  margin-bottom: 8px;
+}
+
+.folder:hover {
+  transform: scale(1.05);
+}
+
+/* ============ GAMES ============ */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.game-card {
+  background: #ffe4ed;
+  padding: 16px;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.game-card:hover {
+  background: #ffd1e1;
+  transform: translateY(-4px);
+}
+
+body.dark .game-card {
+  background: #3a3a55;
+}
+
+body.dark .game-card:hover {
+  background: #4a4a6a;
+}
+
+/* Quiz form */
+.quiz-form label {
+  display: block;
+  margin: 6px 0;
+}
+
+/* ============ PLAYLIST ============ */
+.song-card {
+  background: #ffe4ed;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.song-card:hover {
+  background: #ffd1e1;
+  transform: scale(1.05);
+}
+
+body.dark .song-card {
+  background: #3a3a55;
+}
+
+body.dark .song-card:hover {
+  background: #4a4a6a;
+}
+
+/* ============ TYPEWRITER ============ */
+.typewriter-container {
+  font-family: "Dancing Script", cursive;
+  font-size: 20px;
+  color: var(--accent);
+  min-height: 40px;
+}
+
+.border-glow {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  margin-bottom: 12px;
+}
+
+/* ============ PASSWORD PAGE KEYPAD ============ */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.num-btn {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.num-btn:hover {
+  background: #fce4ec;
+}
+
+body.dark .num-btn {
+  background: #2a2a40;
+  border: 1px solid #555;
+  color: #f2f2f2;
+}
+
+body.dark .num-btn:hover {
+  background: #3a3a55;
 }
