@@ -1,12 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function PasswordPage() {
   const [pin, setPin] = useState("");
   const [error, setError] = useState("");
-  const [showCard, setShowCard] = useState(false); // 🔥 animasi card
+  const [showCard, setShowCard] = useState(false); // animasi card
   const navigate = useNavigate();
-  const audioRef = useRef(null);
 
   const correctPin = "1234";
 
@@ -36,7 +35,7 @@ export default function PasswordPage() {
   const hearts = Array.from({ length: 30 });
 
   useEffect(() => {
-    // ⏳ kasih delay dikit biar card muncul smooth
+    // kasih delay biar card muncul smooth
     const timer = setTimeout(() => setShowCard(true), 200);
     return () => clearTimeout(timer);
   }, []);
@@ -60,12 +59,6 @@ export default function PasswordPage() {
           ❤️
         </span>
       ))}
-
-      {/* 🎵 Musik background (langsung play & loop) */}
-      <audio ref={audioRef} autoPlay loop>
-        <source src="/musik.mp3" type="audio/mpeg" />
-        Browser kamu tidak mendukung audio.
-      </audio>
 
       {/* Card PIN dengan animasi fade-in */}
       <div

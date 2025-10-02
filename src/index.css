@@ -1,1 +1,77 @@
 @import "tailwindcss";
+
+/* 🌸 Animasi kelopak bunga jatuh */
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-fall {
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* 📖 Tambahan biar bisa rotate Y (buku buka) */
+.rotate-y-0 {
+  transform: rotateY(0deg);
+}
+
+.-rotate-y-180 {
+  transform: rotateY(-180deg);
+}
+
+.transform-style-preserve {
+  transform-style: preserve-3d;
+}
+/* 🌼 animasi bunga muncul */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-fadeInScale {
+  animation: fadeInScale 1.5s ease forwards;
+}
+/* 💬 Pesan bubble fade in out */
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeInOut {
+  animation: fadeInOut 4s ease-in-out infinite;
+}
+
+
+
+/* ❤️ Animasi love berdetak */
+@keyframes pulseHeart {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+.animate-pulseHeart {
+  animation: pulseHeart 1.5s ease-in-out infinite;
+}

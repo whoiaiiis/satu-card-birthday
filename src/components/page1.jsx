@@ -36,20 +36,20 @@ export default function Page1({ onNext }) {
       >
         <img
           src="envelope.png"
-          alt="Amplop"
+          alt="Hii sayang"
           className="mx-auto mb-6 drop-shadow-md"
           style={{ maxWidth: "200px" }}
         />
 
         <p className="text-pink-600 text-lg font-medium mb-6">
-          knock knock .. open me up! (∩˃o˂∩)♡
+          yeayy Berhasil!! (∩˃o˂∩)♡
         </p>
 
         <button
           className="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition transform hover:scale-105"
           onClick={onNext}
         >
-          open it &lt;3
+          klik ini &lt;3
         </button>
       </div>
     </div>

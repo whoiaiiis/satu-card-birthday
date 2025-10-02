@@ -13,7 +13,7 @@ export default function Page2({ onNext }) {
 
   return (
     <div className="relative flex justify-center items-center h-screen overflow-hidden bg-gradient-to-b from-pink-50 to-white">
-      {/* Background hearts */}
+      {/* ❤️ Background hearts (berdetak) */}
       {Array.from({ length: 25 }).map((_, i) => (
         <span
           key={i}
@@ -22,16 +22,16 @@ export default function Page2({ onNext }) {
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
             fontSize: `${Math.random() * 20 + 14}px`,
-            animationDuration: `${1 + Math.random() * 2}s`,
+            animationDuration: `${1.2 + Math.random()}s`,
             animationDelay: `${Math.random() * 2}s`,
-            opacity: 0.6,
+            opacity: 0.7,
           }}
         >
           ❤️
         </span>
       ))}
 
-      {/* Amplop */}
+      {/* 📩 Amplop */}
       <div className="relative w-64 h-48">
         {/* Bagian belakang amplop */}
         <div className="absolute inset-0 bg-pink-200 rounded-b-lg shadow-lg"></div>
@@ -46,7 +46,7 @@ export default function Page2({ onNext }) {
           }}
         ></div>
 
-        {/* Isi amplop */}
+        {/* Isi amplop (konten muncul setelah terbuka) */}
         <div
           className={`absolute inset-0 flex flex-col justify-center items-center transition-all duration-700 ${
             showContent
@@ -55,14 +55,14 @@ export default function Page2({ onNext }) {
           }`}
         >
           <img
-            src="surprise.png"
-            alt="Surprise"
+            src="/surprise.png"
+            alt="Sayang.."
             className="mx-auto drop-shadow-md mb-4"
             style={{ maxWidth: "180px" }}
           />
 
           <p className="text-pink-600 text-lg font-medium mb-4">
-            Yay, kamu berhasil buka amplopnya! 🎉
+            Aku sayang kamu heheheh 🎉
           </p>
 
           <button

@@ -12,7 +12,13 @@ export default {
       animation: {
         pulseHeart: "pulseHeart 1.5s ease-in-out infinite",
       },
+        animation: {
+          "bounce-slow": "bounce 3s infinite",
+       
+      },
     },
   },
   plugins: [],
 };
+
+
