@@ -35,7 +35,7 @@ export default function Page1({ onNext }) {
         }`}
       >
         <img
-          src="/satuCardPageSatu.png"
+          src="/satuCardPage1.png"
           alt="Hii sayang"
           className="mx-auto mb-6 drop-shadow-md"
           style={{ maxWidth: "200px" }}
