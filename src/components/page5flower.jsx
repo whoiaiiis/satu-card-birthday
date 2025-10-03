@@ -22,19 +22,55 @@ export default function Page5Flower() {
           --dark-color: #000;
         }
 
-        .title {
-          position: absolute;
-          width: 100%;
-          text-align: center;
-          margin-top: 50px;
-          top: 0;
-          left: 0;
-          color: white;
-          font-family: 'Courier New', Courier, monospace;
-          font-size: 70px;
-          text-shadow: 0px 0px 20px white;
-          z-index: 1000;
-        }
+       .title {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  font-size: 24px;              /* lebih kecil, modern */
+  line-height: 1.5;
+  font-weight: 500;
+  text-align: center;
+
+  /* warna gradasi */
+  background: linear-gradient(90deg, #ec4899, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 0px 0px 10px rgba(236, 72, 153, 0.2); /* glow halus */
+}
+
+.typing {
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  line-height: 1.6;
+  font-weight: 500;
+  text-align: center;
+
+  /* warna gradasi */
+  background: linear-gradient(90deg, #ec4899, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* animasi ketik */
+  width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #ec4899;
+  animation: typing 4s steps(40, end) forwards,
+             blink 0.8s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
 
         .night {
           position: fixed;
@@ -44,12 +80,13 @@ export default function Page5Flower() {
           width: 100%;
           height: 100%;
           filter: blur(0.1vmin);
-          background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(145, 233, 255, 0.2)), repeating-linear-gradient(220deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(189deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(148deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), linear-gradient(90deg, rgb(255, 255, 250), rgb(240, 240, 240));
-        }
 
-       .flower {
-  bottom: 5vmin;   
-}
+          background: radial-gradient(circle at top, #ffe6f7 0%, #fbc2eb 40%, #a18cd1 100%);
+          }
+
+                .flower {
+            bottom: 5vmin;   
+          }
 
         .flower {
           position: absolute;
@@ -499,7 +536,11 @@ export default function Page5Flower() {
       <div className={`relative w-full h-screen flex flex-col items-center justify-center ${!loaded ? 'not-loaded' : ''}`}>
         <div className="night"></div>
         
-        <div className="title">I LOVE U</div>
+       <div className="absolute top-16 left-1/2 -translate-x-1/2 w-4/5">
+  <p className="typing">
+    Kalau bunga butuh matahari untuk mekar, aku cuma butuh kamu untuk bahagia 🌸💖
+  </p>
+</div>
 
         <div className="flowers">
           {/* Flower 1 */}
