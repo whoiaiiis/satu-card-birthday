@@ -35,14 +35,14 @@ export default function Page1({ onNext }) {
         }`}
       >
         <img
-          src="envelope.png"
+          src="/satuCardPageSatu.png"
           alt="Hii sayang"
           className="mx-auto mb-6 drop-shadow-md"
           style={{ maxWidth: "200px" }}
         />
 
         <p className="text-pink-600 text-lg font-medium mb-6">
-          yeayy Berhasil!! (∩˃o˂∩)♡
+          Yeayy Berhasil!! (∩˃o˂∩)♡
         </p>
 
         <button
