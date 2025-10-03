@@ -31,24 +31,23 @@ export default function Dashboard() {
 
       {/* Container folder */}
       <div className="grid grid-cols-2 gap-10">
-        {/* Reusable FolderCard */}
         <FolderCard
-          icon="https://cdn-icons-png.flaticon.com/512/337/337946.png"
+          image="/fotoDashboard.png"
           label="Foto"
           onClick={() => navigate("/kenangan")}
         />
         <FolderCard
-          icon="https://cdn-icons-png.flaticon.com/512/716/716784.png"
+          image="/gameDashboard.png"
           label="Games"
           onClick={() => navigate("/games")}
         />
         <FolderCard
-          icon="https://cdn-icons-png.flaticon.com/512/727/727245.png"
+          image="/songDashboard.png"
           label="Playlist"
           onClick={() => navigate("/playlist")}
         />
         <FolderCard
-          icon="https://cdn-icons-png.flaticon.com/512/1179/1179069.png"
+          image="/aboutYouDashboard.png"
           label="About"
           onClick={() => navigate("/about")}
         />
@@ -57,7 +56,7 @@ export default function Dashboard() {
   );
 }
 
-function FolderCard({ icon, label, onClick }) {
+function FolderCard({ image, label, onClick }) {
   return (
     <div
       className="relative w-44 h-44 cursor-pointer transition-transform duration-300 hover:scale-105"
@@ -81,7 +80,7 @@ function FolderCard({ icon, label, onClick }) {
 
         {/* Isi folder */}
         <img
-          src={icon}
+          src={image}
           alt={label}
           className="w-16 h-16 mb-2 z-10 transition-transform duration-300 group-hover:translate-y-1"
         />
@@ -92,5 +91,3 @@ function FolderCard({ icon, label, onClick }) {
     </div>
   );
 }
-
-
