@@ -31,58 +31,66 @@ export default function Dashboard() {
 
       {/* Container folder */}
       <div className="grid grid-cols-2 gap-10">
-        {/* Kenangan Foto */}
-        <div
-          className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md cursor-pointer hover:scale-105 hover:shadow-lg transition"
+        {/* Reusable FolderCard */}
+        <FolderCard
+          icon="https://cdn-icons-png.flaticon.com/512/337/337946.png"
+          label="Foto"
           onClick={() => navigate("/kenangan")}
-        >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-            alt="Foto"
-            className="w-16 h-16 mb-2"
-          />
-          <p className="text-pink-700 font-medium">Foto</p>
-        </div>
-
-        {/* Games */}
-        <div
-          className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md cursor-pointer hover:scale-105 hover:shadow-lg transition"
+        />
+        <FolderCard
+          icon="https://cdn-icons-png.flaticon.com/512/716/716784.png"
+          label="Games"
           onClick={() => navigate("/games")}
-        >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/716/716784.png"
-            alt="Games"
-            className="w-16 h-16 mb-2"
-          />
-          <p className="text-pink-700 font-medium">Games</p>
-        </div>
-
-        {/* Playlist */}
-        <div
-          className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md cursor-pointer hover:scale-105 hover:shadow-lg transition"
+        />
+        <FolderCard
+          icon="https://cdn-icons-png.flaticon.com/512/727/727245.png"
+          label="Playlist"
           onClick={() => navigate("/playlist")}
-        >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/727/727245.png"
-            alt="Playlist"
-            className="w-16 h-16 mb-2"
-          />
-          <p className="text-pink-700 font-medium">Playlist</p>
-        </div>
-
-        {/* About */}
-        <div
-          className="flex flex-col items-center p-6 bg-white rounded-xl shadow-md cursor-pointer hover:scale-105 hover:shadow-lg transition"
+        />
+        <FolderCard
+          icon="https://cdn-icons-png.flaticon.com/512/1179/1179069.png"
+          label="About"
           onClick={() => navigate("/about")}
-        >
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/1179/1179069.png"
-            alt="About"
-            className="w-16 h-16 mb-2"
-          />
-          <p className="text-pink-700 font-medium">About</p>
-        </div>
+        />
       </div>
     </div>
   );
 }
+
+function FolderCard({ icon, label, onClick }) {
+  return (
+    <div
+      className="relative w-44 h-44 cursor-pointer transition-transform duration-300 hover:scale-105"
+      onClick={onClick}
+    >
+      {/* Bentuk folder */}
+      <div
+        className="w-full h-full bg-gradient-to-br from-pink-200 to-pink-100 shadow-md flex flex-col items-center justify-center relative rounded-lg overflow-hidden group"
+        style={{
+          clipPath:
+            "polygon(0 25%, 20% 25%, 25% 0, 100% 0, 100% 100%, 0% 100%)",
+        }}
+      >
+        {/* Tab folder */}
+        <div
+          className="absolute top-0 left-0 w-1/3 h-6 bg-pink-300 rounded-t-md shadow-sm transition-transform duration-300 group-hover:-translate-y-1 group-hover:shadow-md"
+          style={{
+            clipPath: "polygon(0 100%, 0 0, 100% 0, 90% 100%)",
+          }}
+        ></div>
+
+        {/* Isi folder */}
+        <img
+          src={icon}
+          alt={label}
+          className="w-16 h-16 mb-2 z-10 transition-transform duration-300 group-hover:translate-y-1"
+        />
+        <p className="text-pink-700 font-semibold z-10 transition-colors duration-300 group-hover:text-pink-900">
+          {label}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+

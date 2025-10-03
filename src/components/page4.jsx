@@ -35,7 +35,7 @@ export default function Page4({ onNext }) {
         }`}
       >
         <img
-          src=""
+          src="/boxkadopage4.png"
           alt="Gift"
           className="mx-auto mb-6 drop-shadow-md animate-bounce-slow"
           style={{ maxWidth: "200px" }}
