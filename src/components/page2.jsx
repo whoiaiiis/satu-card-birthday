@@ -55,7 +55,7 @@ export default function Page2({ onNext }) {
           }`}
         >
           <img
-            src="/surprise.png"
+            src="/satuCardPage2.png"
             alt="Sayang.."
             className="mx-auto drop-shadow-md mb-4"
             style={{ maxWidth: "180px" }}
