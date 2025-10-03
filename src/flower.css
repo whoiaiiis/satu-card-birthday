@@ -1,0 +1,186 @@
+/* 🌙 Background malam */
+.night {
+    background: radial-gradient(ellipse at bottom, #0d1a1f 0%, #000 100%);
+    overflow: hidden;
+}
+
+/* 🌸 Wrapper bunga */
+.flowers {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 4rem;
+}
+
+/* 🌸 Flower */
+.flower {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 🌼 Kelopak bunga */
+.flower__leafs {
+    position: relative;
+    width: 6rem;
+    height: 6rem;
+}
+
+.flower__leaf {
+    position: absolute;
+    width: 3rem;
+    height: 4rem;
+    background: white;
+    border-radius: 50% 50% 40% 40%;
+    transform-origin: bottom center;
+}
+
+.flower__leaf--1 {
+    transform: rotate(0deg) translateY(-2rem);
+}
+
+.flower__leaf--2 {
+    transform: rotate(90deg) translateY(-2rem);
+}
+
+.flower__leaf--3 {
+    transform: rotate(180deg) translateY(-2rem);
+}
+
+.flower__leaf--4 {
+    transform: rotate(270deg) translateY(-2rem);
+}
+
+/* 🌼 Pusat bunga */
+.flower__white-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2rem;
+    height: 2rem;
+    background: #ffe066;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 🌿 Batang */
+.flower__line {
+    width: 0.4rem;
+    height: 10rem;
+    background: white;
+    margin-top: -1rem;
+    position: relative;
+}
+
+/* 🌿 Daun kecil di batang */
+.flower__line__leaf {
+    position: absolute;
+    width: 2rem;
+    height: 4rem;
+    background: #1aaa15;
+    border-radius: 50% 50% 40% 40%;
+    transform-origin: bottom center;
+    animation: wiggle 4s ease-in-out infinite;
+}
+
+.flower__line__leaf--1 {
+    left: -1.5rem;
+    top: 2rem;
+    transform: rotate(-40deg);
+}
+
+.flower__line__leaf--2 {
+    right: -1.5rem;
+    top: 3rem;
+    transform: rotate(40deg);
+}
+
+.flower__line__leaf--3 {
+    left: -1.5rem;
+    top: 5rem;
+    transform: rotate(-30deg);
+}
+
+.flower__line__leaf--4 {
+    right: -1.5rem;
+    top: 6rem;
+    transform: rotate(30deg);
+}
+
+/* 🌿 Rumput bawah */
+.grass {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.grass__leaf {
+    width: 0.6rem;
+    height: 6rem;
+    background: #1aaa15;
+    border-radius: 50% 50% 0 0;
+    transform-origin: bottom center;
+    animation: wiggle 6s ease-in-out infinite;
+}
+
+/* 🌿 Daun besar belakang (masking) */
+.long-g {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+}
+
+.long-g .leaf {
+    --w: 15vmin;
+    --h: 40vmin;
+    --c: #1aaa15;
+    position: absolute;
+    bottom: 0;
+    width: var(--w);
+    height: var(--h);
+    border-top-left-radius: 100%;
+    border-left: 2vmin solid var(--c);
+
+    /* ✅ Masking standar + fallback */
+    mask-image: linear-gradient(to top, transparent 20%, var(--c));
+    mask-repeat: no-repeat;
+    mask-size: cover;
+
+    -webkit-mask-image: linear-gradient(to top, transparent 20%, var(--c));
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: cover;
+
+    transform-origin: bottom center;
+    animation: wiggle 5s ease-in-out infinite;
+}
+
+/* ✨ Bubuk (ditrigger dari JSX dengan class animate-floatUp) */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-150px);
+        opacity: 0;
+    }
+}
+
+/* 🌊 Wiggle animasi daun */
+@keyframes wiggle {
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+}

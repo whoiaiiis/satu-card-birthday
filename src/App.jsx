@@ -1,10 +1,11 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import PasswordPage from "./components/PasswordPage";
-import Page1 from "./components/Page1";
+import Page1 from "./components/page1";
 
 import Page3 from "./components/Page3";
-import Page4 from "./components/Page4";
-import Dashboard from "./components/Dashboard";
+import Page4 from "./components/page4";
+import Page5Flower from "./components/page5flower";
+import Dashboard from "./components/dashboard";
 import Games from "./components/Games";
 import Playlist from "./components/Playlist";
 import About from "./components/About";
@@ -46,8 +47,13 @@ export default function App() {
         />
         <Route
           path="/page4"
-          element={<Page4 onNext={() => navigate("/dashboard")} />}
+          element={<Page4 onNext={() => navigate("/page5flower")} />}
         />
+        <Route 
+          path="/page5flower" 
+          element={<Page5Flower onNext={() => navigate("/dashboard")} />} 
+        />
+
         <Route path="/dashboard" element={<Dashboard />} />
 
         {/* Menu dari Dashboard */}

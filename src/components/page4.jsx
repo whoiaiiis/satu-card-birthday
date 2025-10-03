@@ -35,14 +35,14 @@ export default function Page4({ onNext }) {
         }`}
       >
         <img
-          src="gift.png"
+          src=""
           alt="Gift"
           className="mx-auto mb-6 drop-shadow-md animate-bounce-slow"
           style={{ maxWidth: "200px" }}
         />
 
         <p className="text-pink-600 text-lg font-medium mb-6">
-          Dan ada hadiah lagi... ✨ klik di bawah untuk lihat Dashboard spesial
+          Dan ada hadiah lagi... ✨ klik di bawah untuk lihat Bunga spesial
           💕
         </p>
 
@@ -50,7 +50,7 @@ export default function Page4({ onNext }) {
           className="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition transform hover:scale-105"
           onClick={onNext}
         >
-          Lihat Dashboard 🎁
+          Lihat Bunga 🎁
         </button>
       </div>
     </div>
