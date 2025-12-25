@@ -26,7 +26,7 @@ export default function Dashboard() {
 
       {/* Judul */}
       <h2 className="text-4xl font-extrabold text-pink-700 mb-12 text-center drop-shadow-[2px_2px_0px_#000]">
-        💕 Dashboard Cinta Kita 💕
+       Tap Tap Menu
       </h2>
 
       {/* Container folder */}
@@ -51,7 +51,7 @@ export default function Dashboard() {
         />
         <FolderCard
           image="/aboutYouDashboard.png"
-          label="About"
+          label="Wish"
           onClick={() => navigate("/about")}
           color="from-purple-100 via-pink-100 to-purple-200"
         />

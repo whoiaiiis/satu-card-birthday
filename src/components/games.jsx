@@ -17,18 +17,18 @@ export default function Games() {
     const ans2 = form.get("q2");
     const ans3 = form.get("q3");
 
-    if (ans1 === "Ungu" && ans2 === "Sushi" && ans3 === "14 Februari") {
-      setQuizResult("🎉 YESS! Semua jawaban benar, kamu Roblox Master ❤️");
+    if (ans1 === "Baby Pink" && ans2 === "Bakso" && ans3 === "2 April") {
+      setQuizResult("🎉 YESS! Semua jawaban benar, kamu Master ❤️");
     } else {
-      setQuizResult("😜 Salah blok nih! Coba lagi yaa~");
+      setQuizResult("Kok SALAH😡");
     }
   };
 
   const calcLove = () => {
     if (yourName && myName) {
-      setCalcResult(`💖 ${yourName} + ${myName} = 100% Power Couple di Roblox! 🎮`);
+      setCalcResult(`💖 ${yourName} + ${myName} = 100% Power Couple! 🎮`);
     } else {
-      setCalcResult("🕹️ Isi dulu namanya biar bisa mulai petualangan 💫");
+      setCalcResult("🕹️ Isi dulu namanya babe");
     }
   };
 
@@ -67,7 +67,7 @@ export default function Games() {
       }}
     >
       {/* Tombol kembali */}
-      <Btn onClick={() => navigate("/dashboard")}>⬅️ Kembali</Btn>
+      <Btn onClick={() => navigate("/dashboard")}>Back</Btn>
 
       <h2
         style={{
@@ -78,27 +78,28 @@ export default function Games() {
           textShadow: "2px 2px 0px white, 4px 4px 0px #000",
         }}
       >
-        🎮 Games Roblox Lucu Buat Kita
+        🎮 Games SERUNYA tuh INI
       </h2>
 
       <AnimatePresence mode="wait">
         {section === "menu" && (
-          <motion.div
-            key="menu"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-              gap: "18px",
-              marginTop: "30px",
-            }}
-          >
+            <motion.div
+                key="menu"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "18px",
+                  marginTop: "30px",
+                }}
+            >
             {[
-              { title: "💝 Love Quiz", key: "quiz", color: "#ffb3c6" },
-              { title: "💕 Love Calculator", key: "calc", color: "#dab6fc" },
-              { title: "🧩 Teka-teki Cinta", key: "riddle", color: "#ffd6a5" },
+              { title: "Quiz Yang Ga Sesulit Pelajaran", key: "quiz", color: "#ffb3c6" },
+              { title: "Belajar Berhitung Deh", key: "calc", color: "#dab6fc" },
+              { title: "Jawab Kalo Kamu Pinter", key: "riddle", color: "#ffd6a5" },
             ].map((item) => (
               <motion.div
                 key={item.key}
@@ -114,6 +115,9 @@ export default function Games() {
                   fontWeight: "800",
                   border: "3px solid black",
                   boxShadow: "5px 5px 0px #000",
+                  width: "320px",
+                  maxWidth: "90vw",
+                  textAlign: "center",
                 }}
               >
                 {item.title}
@@ -155,26 +159,26 @@ export default function Games() {
       border: "2px solid #ff99cc"
     }}/>
 
-    <h3 style={{ textAlign: "center", color: "#cc33ff" }}>💝 Love Quiz</h3>
+    <h3 style={{ textAlign: "center", color: "#cc33ff" }}>Ini dia kuis termudah di duniaaaa</h3>
     <p>1. Warna favorit aku apa?</p>
-    <label><input type="radio" name="q1" value="Merah" /> Merah</label><br />
-    <label><input type="radio" name="q1" value="Biru" /> Biru</label><br />
-    <label><input type="radio" name="q1" value="Ungu" /> Ungu</label><br />
+    <label><input type="radio" name="q1" value="Baby Pink" /> Baby Pink</label><br />
+    <label><input type="radio" name="q1" value="Baby Blue" /> Baby Blue</label><br />
+    <label><input type="radio" name="q1" value="Violet" /> Violet</label><br />
 
     <p>2. Makanan kesukaan aku?</p>
-    <label><input type="radio" name="q2" value="Sushi" /> Sushi</label><br />
+    <label><input type="radio" name="q2" value="Mie Ayam" /> Mie Ayam</label><br />
     <label><input type="radio" name="q2" value="Bakso" /> Bakso</label><br />
-    <label><input type="radio" name="q2" value="Pizza" /> Pizza</label><br />
+    <label><input type="radio" name="q2" value="Kamu" /> Kamu</label><br />
 
     <p>3. Tanggal jadian kita kapan?</p>
-    <label><input type="radio" name="q3" value="1 Januari" /> 1 Januari</label><br />
-    <label><input type="radio" name="q3" value="14 Februari" /> 14 Februari</label><br />
-    <label><input type="radio" name="q3" value="25 Desember" /> 25 Desember</label><br />
+    <label><input type="radio" name="q3" value="2 April" /> 2 April</label><br />
+    <label><input type="radio" name="q3" value="14 Mei" /> 14 Mei</label><br />
+    <label><input type="radio" name="q3" value="27 Desember" /> 27 Desember</label><br />
 
     <div style={{ textAlign: "center", marginTop: "12px" }}>
-      <Btn type="submit">✔️ Cek Jawaban</Btn>
+      <Btn type="submit">Cek Jawaban</Btn>
       <p>{quizResult}</p>
-      <Btn onClick={() => setSection("menu")}>⬅️ Balik</Btn>
+      <Btn onClick={() => setSection("menu")}>Back</Btn>
     </div>
   </motion.form>
 )}
@@ -210,7 +214,7 @@ export default function Games() {
       border: "2px solid #cc99ff"
     }}/>
 
-    <h3 style={{ color: "#9933ff" }}>💕 Love Calculator</h3>
+    <h3 style={{ color: "#9933ff" }}>Love Calculator</h3>
     <input
       value={yourName}
       onChange={(e) => setYourName(e.target.value)}
@@ -227,7 +231,7 @@ export default function Games() {
     <br />
     <Btn onClick={calcLove}>Hitung</Btn>
     <p>{calcResult}</p>
-    <Btn onClick={() => setSection("menu")}>⬅️ Balik</Btn>
+    <Btn onClick={() => setSection("menu")}>Back</Btn>
   </motion.div>
 )}
 
@@ -264,10 +268,10 @@ export default function Games() {
       border: "2px solid #ff99cc"
     }}/>
 
-    <h3 style={{ color: "#d63384" }}>🧩 Teka-teki Cinta</h3>
-    <p>Aku selalu bersamamu, tak pernah jauh, walau tak terlihat. Siapakah aku?</p>
-    <p style={{ fontWeight: "700", color: "#ff3399" }}>❤️ Jawabannya: Cinta kamu 😘</p>
-    <Btn onClick={() => setSection("menu")}>⬅️ Balik</Btn>
+ <h3 style={{ color: "#d63384" }}>🧩 Teka-teki Mini</h3>
+<p>Aku selalu ada, nggak kelihatan, tapi kerasa. Apa hayo?</p>
+<p style={{ fontWeight: "600", color: "#ff4da6" }}>Jawaban: perhatianku 😌</p>
+    <Btn onClick={() => setSection("menu")}>Back</Btn>
   </motion.div>
 )}
 

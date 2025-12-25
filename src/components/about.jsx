@@ -6,10 +6,19 @@ export default function About() {
   const navigate = useNavigate();
   const [displayedText, setDisplayedText] = useState("");
 
-  const message = `Sayang, makasih sudah selalu ada. Kamu adalah hadiah terindah dalam hidupku 💖 
-Bersamamu, setiap hari terasa indah seperti cerita yang nggak ada habisnya. 
-Aku bersyukur bisa punya kamu, dan aku ingin kita terus menulis kisah ini bareng-bareng selamanya. 💕`;
-
+  const message = `Happy Birthday, my favorite person!
+Selamat ulang tahun yaa sayang
+Thank you for being such an amazing part of my life.
+Kamu bukan cuma pacar, but also my best friend, my home, and my safe place
+Semoga di umur yang baru ini,
+all your dreams come true,
+semua capekmu terbayar,
+dan semua hal baik selalu datang ke kamu
+No matter what happens,
+aku harap kita bisa keep growing together,
+and laughing together,
+Once again, happy birthday, my love.
+I’m so grateful to have you, today and always`;
   // Typing effect
   useEffect(() => {
     let i = 0;
@@ -20,7 +29,7 @@ Aku bersyukur bisa punya kamu, dan aku ingin kita terus menulis kisah ini bareng
       } else {
         clearInterval(interval);
       }
-    }, 40);
+    }, 35);
     return () => clearInterval(interval);
   }, []);
 
@@ -28,134 +37,89 @@ Aku bersyukur bisa punya kamu, dan aku ingin kita terus menulis kisah ini bareng
     <div
       style={{
         minHeight: "100vh",
-        background: "linear-gradient(135deg, #fbcfe8, #e9d5ff)",
+        background: "linear-gradient(135deg, #fbcfe8, #ddd6fe)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "30px",
+        padding: 24,
         fontFamily: "Poppins, sans-serif",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Confetti bunga */}
       <Confetti
         width={window.innerWidth}
         height={window.innerHeight}
-        recycle={true}
         numberOfPieces={120}
-        gravity={0.05}
-        colors={["#f9a8d4", "#c084fc", "#fbcfe8", "#e9d5ff"]}
-        drawShape={(ctx) => {
-          const petals = 5;
-          const radius = 6;
-          ctx.beginPath();
-          for (let i = 0; i < petals; i++) {
-            const angle = (i * 2 * Math.PI) / petals;
-            const x = Math.cos(angle) * radius;
-            const y = Math.sin(angle) * radius;
-            ctx.quadraticCurveTo(0, 0, x, y);
-          }
-          ctx.closePath();
-          ctx.fill();
-        }}
+        gravity={0.06}
+        colors={["#f472b6", "#a78bfa", "#fbcfe8"]}
       />
 
-      {/* Musik Background */}
-      <audio autoPlay loop>
-        <source
-          src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-          type="audio/mpeg"
-        />
-      </audio>
-
+      {/* CARD ROBLOX */}
       <div
         style={{
-          background: "#f8e9f4",
-          borderRadius: "25px",
-          padding: "30px",
-          maxWidth: "420px",
-          width: "100%",
-          boxShadow: "9px 9px 18px #d1bcd0, -9px -9px 18px #ffffff",
+          background: "#fde7f3",
+          border: "4px solid black",
+          borderRadius: 20,
+          padding: 24,
+          width: 420,
+          maxWidth: "100%",
+          boxShadow: "8px 8px 0px black",
           textAlign: "center",
-          zIndex: 2,
-          animation: "zoomIn 1s ease",
+          zIndex: 10,
         }}
       >
-        {/* Tombol kembali */}
+        {/* BUTTON BACK ROBLOX */}
         <button
           onClick={() => navigate("/dashboard")}
           style={{
             padding: "10px 18px",
-            border: "none",
-            borderRadius: "12px",
-            background: "linear-gradient(135deg, #f9a8d4, #c084fc)",
+            marginBottom: 16,
+            background: "#a78bfa",
             color: "white",
-            fontWeight: "bold",
+            fontWeight: "900",
+            borderRadius: 12,
+            border: "4px solid black",
+            boxShadow: "4px 4px 0px black",
             cursor: "pointer",
-            marginBottom: "20px",
-            boxShadow: "4px 4px 10px rgba(0,0,0,0.2)",
-            transition: "0.3s",
+            transition: "0.2s",
           }}
+          onMouseDown={(e) => (e.target.style.transform = "translate(2px,2px)")}
+          onMouseUp={(e) => (e.target.style.transform = "translate(0,0)")}
         >
-          ⬅️ Kembali
+          BACK
         </button>
 
-        {/* Foto */}
-        <div
+
+        <h2
           style={{
-            width: "120px",
-            height: "120px",
-            borderRadius: "50%",
-            margin: "0 auto 20px",
-            overflow: "hidden",
-            boxShadow: "0 0 20px 5px rgba(236,72,153,0.6)",
-            animation: "pulseGlow 2s infinite",
+            fontSize: 24,
+            fontWeight: 900,
+            color: "#7c3aed",
+            marginBottom: 12,
           }}
         >
-          <img
-            src="https://via.placeholder.com/150" // ganti dengan foto kamu
-            alt="Foto Kita"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          />
-        </div>
+          I WISH I WISH
+        </h2>
 
-        <h2 style={{ color: "#a855f7", marginBottom: "15px" }}>💌 Tentang Kita</h2>
-
-        {/* Card isi pesan */}
+        {/* CARD TEKS ROBLOX */}
         <div
           style={{
-            background: "#f8e9f4",
-            padding: "20px",
-            borderRadius: "20px",
+            background: "#fff",
+            padding: 18,
+            borderRadius: 16,
+            border: "4px solid black",
+            boxShadow: "6px 6px 0px black",
             textAlign: "left",
-            lineHeight: "1.6",
-            color: "#444",
-            fontSize: "15px",
-            boxShadow:
-              "inset 6px 6px 12px #d1bcd0, inset -6px -6px 12px #ffffff",
+            lineHeight: 1.6,
             whiteSpace: "pre-wrap",
-            minHeight: "150px",
+            fontSize: 14,
+            minHeight: 140,
           }}
         >
           {displayedText}
         </div>
       </div>
-
-      {/* CSS Animations */}
-      <style>
-        {`
-          @keyframes zoomIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-          }
-          @keyframes pulseGlow {
-            0% { box-shadow: 0 0 20px 5px rgba(236,72,153,0.6); }
-            50% { box-shadow: 0 0 35px 10px rgba(192,132,252,0.8); }
-            100% { box-shadow: 0 0 20px 5px rgba(236,72,153,0.6); }
-          }
-        `}
-      </style>
     </div>
   );
 }

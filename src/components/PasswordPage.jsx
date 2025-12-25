@@ -7,7 +7,7 @@ export default function PasswordPage() {
   const [showCard, setShowCard] = useState(false); // animasi card
   const navigate = useNavigate();
 
-  const correctPin = "1234";
+  const correctPin = "1627";
 
   const addNum = (val) => {
     if (pin.length < 6) {
@@ -62,20 +62,20 @@ export default function PasswordPage() {
 
       {/* Card PIN dengan animasi fade-in */}
       <div
-        className={`bg-white p-8 rounded-2xl shadow-xl w-80 text-center z-10 transform transition-all duration-700 ${
+        className={`bg-gradient-to-br from-pink-200 via-pink-100 to-pink-300 p-8 rounded-2xl w-80 text-center z-10 transform transition-all duration-700 border-4 border-black shadow-[6px_6px_0px_black] ${
           showCard ? "opacity-100 scale-100" : "opacity-0 scale-90"
         }`}
       >
-        <h2 className="text-pink-600 text-xl font-semibold mb-4">
-          Masukin PIN dulu ya sayang 💖
-        </h2>
+        <h2 className="text-black text-2xl font-extrabold mb-4 border-2 border-black bg-white p-3 rounded-xl shadow-[3px_3px_0px_black]">
+  HARUS TAU PIN NYA 😡
+</h2>
 
         <input
           type="password"
           value={pin}
           placeholder="••••••"
           readOnly
-          className="text-center text-2xl border-2 border-pink-400 rounded-lg p-2 w-3/4 mb-4 bg-pink-50 outline-none"
+          className="text-center text-2xl border-3 border-black rounded-lg p-2 w-3/4 mb-4 bg-white outline-none font-bold shadow-[3px_3px_0px_black]"
         />
 
         <div className="grid grid-cols-3 gap-3 justify-center mb-4">
@@ -83,26 +83,26 @@ export default function PasswordPage() {
             <button
               key={num}
               onClick={() => addNum(num)}
-              className="bg-pink-200 hover:bg-pink-400 text-pink-800 font-medium py-3 rounded-xl transition transform hover:scale-110"
+              className="bg-gradient-to-br from-pink-300 to-pink-200 hover:from-pink-200 hover:to-pink-100 text-black font-extrabold py-3 rounded-xl transition transform hover:translate-y-[-3px] border-3 border-black shadow-[4px_4px_0px_black] hover:shadow-[6px_6px_0px_black]"
             >
               {num}
             </button>
           ))}
           <button
             onClick={delNum}
-            className="bg-pink-200 hover:bg-pink-400 text-pink-800 font-medium py-3 rounded-xl transition transform hover:scale-110"
+            className="bg-gradient-to-br from-pink-300 to-pink-200 hover:from-pink-200 hover:to-pink-100 text-black font-extrabold py-3 rounded-xl transition transform hover:translate-y-[-3px] border-3 border-black shadow-[4px_4px_0px_black] hover:shadow-[6px_6px_0px_black]"
           >
             ⌫
           </button>
           <button
             onClick={() => addNum("0")}
-            className="bg-pink-200 hover:bg-pink-400 text-pink-800 font-medium py-3 rounded-xl transition transform hover:scale-110"
+            className="bg-gradient-to-br from-pink-300 to-pink-200 hover:from-pink-200 hover:to-pink-100 text-black font-extrabold py-3 rounded-xl transition transform hover:translate-y-[-3px] border-3 border-black shadow-[4px_4px_0px_black] hover:shadow-[6px_6px_0px_black]"
           >
             0
           </button>
           <button
             onClick={clearNum}
-            className="bg-pink-200 hover:bg-pink-400 text-pink-800 font-medium py-3 rounded-xl transition transform hover:scale-110"
+            className="bg-gradient-to-br from-pink-300 to-pink-200 hover:from-pink-200 hover:to-pink-100 text-black font-extrabold py-3 rounded-xl transition transform hover:translate-y-[-3px] border-3 border-black shadow-[4px_4px_0px_black] hover:shadow-[6px_6px_0px_black]"
           >
             ✖
           </button>
@@ -110,9 +110,9 @@ export default function PasswordPage() {
 
         <button
           onClick={checkPassword}
-          className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full shadow-md transition transform hover:scale-105"
+          className="bg-gradient-to-br from-pink-500 to-pink-400 hover:from-pink-400 hover:to-pink-300 text-white px-6 py-3 rounded-full font-extrabold transition transform hover:translate-y-[-3px] border-3 border-black shadow-[5px_5px_0px_black] hover:shadow-[7px_7px_0px_black]"
         >
-          Masuk 💕
+          Silahkan Masuk Massss 🤭
         </button>
 
         {error && (
