@@ -9,7 +9,7 @@ import Dashboard from "./components/dashboard";
 import Games from "./components/games";
 import Playlist from "./components/playlist";
 import About from "./components/about";
-import Kenangan from "./components/Kenangan";
+import Kenangan from "./components/kenangan";
 import { useRef, useEffect } from "react";
 import Page2 from "./components/page2";
 
