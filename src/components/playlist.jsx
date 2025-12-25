@@ -5,150 +5,113 @@ import lagu2 from "../assets/audio/lagu2.mp3";
 import lagu3 from "../assets/audio/lagu3.mp3";
 import lagu4 from "../assets/audio/lagu4.mp3";
 
-
 export default function Playlist() {
   const navigate = useNavigate();
   const [song, setSong] = useState(null);
-  const [progress, setProgress] = useState(0); // progress bar %
+  const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const timerRef = useRef(null);
 
   const songs = {
-    song1: { 
-     title: "Rahasia Hati",
-artist: "NIDJI",
-message: "Andai matamu melihat aku, mungkin kau tahu rahasiaku 💕",
-lyrics: "Andai matamu melihat aku, terungkap semua isi hatiku…",
-src: lagu2,
-    preview: 20,
+    song1: {
+      title: "Rahasia Hati",
+      artist: "NIDJI",
+      message: "Andai matamu melihat aku, mungkin kau tahu rahasiaku 💕",
+      lyrics: "Andai matamu melihat aku, terungkap semua isi hatiku…",
+      src: lagu2,
+      preview: 20,
     },
-    song2: { 
-    title: "Just The Way You Are",
-artist: "Bruno Mars",
-message: "Kamu indah apa adanya, tanpa perlu berubah sedikit pun",
-lyrics: `When I see your face
+    song2: {
+      title: "Just The Way You Are",
+      artist: "Bruno Mars",
+      message: "Kamu indah apa adanya, tanpa perlu berubah sedikit pun",
+      lyrics: `When I see your face
 There's not a thing that I would change
 'Cause you're amazing
 Just the way you are`,
-src: lagu1,
-    preview: 20,
+      src: lagu1,
+      preview: 20,
     },
- song3: { 
-  title: "Teruntuk Mia", 
-  artist: "Nuh", 
-  message: "Sederhana tapi berarti, tentang dua orang yang memilih berjalan bareng 🤍",
-  lyrics: `Berdua menunggu di sini
+    song3: {
+      title: "Teruntuk Mia",
+      artist: "Nuh",
+      message: "Sederhana tapi berarti, tentang dua orang yang memilih berjalan bareng 🤍",
+      lyrics: `Berdua menunggu di sini
 Berharap hujan tak berhenti
 Dengan dirimu, ku di sini
-Sederhana, tapi berarti
-
-Di antara senyumanmu dan hujan
-Aku tak tahu mana yang lebih indah`,
-  src: lagu3,
-  preview: 20,
-},
-   song4: { 
-  title: "Who Knows", 
-  artist: "Daniel Caesar", 
-  message: "Tentang cinta yang tenang, ragu tapi tulus—kalau bukan kamu, siapa lagi? 💜",
-  lyrics: `Who knows how long I've loved you
-You know I love you still
-Will I wait a lonely lifetime
-If you want me to, I will`,
-  src: lagu4,
-  preview: 20,
-},
+Sederhana, tapi berarti`,
+      src: lagu3,
+      preview: 20,
+    },
+    song4: {
+      title: "Who Knows",
+      artist: "Daniel Caesar",
+      message: "Tentang cinta yang tenang, ragu tapi tulus—kalau bukan kamu, siapa lagi? 💜",
+      lyrics: `Who knows how long I've loved you
+You know I love you still`,
+      src: lagu4,
+      preview: 20,
+    },
   };
 
-  // Audio playback & progress
+  /* ================= AUDIO ================= */
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     if (song) {
       setProgress(0);
-      const src = songs[song].src || "";
-      const preview = songs[song].preview || 30; // seconds
-      audio.src = src;
+      audio.src = songs[song].src;
       audio.load();
-      audio.play()
-        .then(() => {
-          setIsPlaying(true);
-          if (timerRef.current) clearTimeout(timerRef.current);
-          timerRef.current = setTimeout(() => {
-            audio.pause();
-            setIsPlaying(false);
-          }, preview * 1000);
-        })
-        .catch(() => setIsPlaying(false));
-    } else {
-      audio.pause();
-      audio.currentTime = 0;
-      setIsPlaying(false);
-      setProgress(0);
+      audio.play().then(() => setIsPlaying(true));
+
+      timerRef.current = setTimeout(() => {
+        audio.pause();
+        setIsPlaying(false);
+      }, songs[song].preview * 1000);
     }
 
     const onTime = () => {
-      if (audio.duration) setProgress((audio.currentTime / audio.duration) * 100);
+      if (audio.duration)
+        setProgress((audio.currentTime / audio.duration) * 100);
     };
-    const onEnded = () => setIsPlaying(false);
 
     audio.addEventListener("timeupdate", onTime);
-    audio.addEventListener("ended", onEnded);
     return () => {
       audio.removeEventListener("timeupdate", onTime);
-      audio.removeEventListener("ended", onEnded);
-      if (timerRef.current) clearTimeout(timerRef.current);
+      clearTimeout(timerRef.current);
     };
   }, [song]);
 
-  // Halaman detail lagu
+  /* ================= PLAYER ================= */
   if (song) {
     const current = songs[song];
     return (
-      <div style={styles.page}>
+      <div style={styles.pageCenter}>
         <div style={styles.playerCard}>
           <button onClick={() => setSong(null)} style={styles.backBtn}>⬅</button>
 
-          {/* Cover */}
           <div style={styles.cover}>🎵</div>
-
           <h2 style={styles.title}>{current.title}</h2>
           <p style={styles.artist}>{current.artist}</p>
           <p style={styles.message}>{current.message}</p>
 
-          {/* Progress */}
           <div style={styles.progressBar}>
-            <div style={{...styles.progressFill, width: `${progress}%`}} />
+            <div style={{ ...styles.progressFill, width: `${progress}%` }} />
           </div>
 
-          {/* Kontrol */}
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <NeoButton onClick={() => {
-              const keys = Object.keys(songs);
-              const idx = keys.indexOf(song);
-              if (idx > 0) setSong(keys[idx - 1]);
-            }}>⏮</NeoButton>
-            <NeoButton big onClick={() => {
-              const audio = audioRef.current;
-              if (!audio) return;
-              if (isPlaying) { audio.pause(); setIsPlaying(false); }
-              else { audio.play().then(() => setIsPlaying(true)).catch(() => {}); }
-            }}>{isPlaying ? '⏸' : '⏯'}</NeoButton>
-            <NeoButton onClick={() => {
-              const keys = Object.keys(songs);
-              const idx = keys.indexOf(song);
-              if (idx < keys.length - 1) setSong(keys[idx + 1]);
-            }}>⏭</NeoButton>
+          <div style={styles.controls}>
+            <NeoButton onClick={() => setSong(prevSong(song, songs))}>⏮</NeoButton>
+            <NeoButton big onClick={() => togglePlay(audioRef, isPlaying, setIsPlaying)}>
+              {isPlaying ? "⏸" : "▶️"}
+            </NeoButton>
+            <NeoButton onClick={() => setSong(nextSong(song, songs))}>⏭</NeoButton>
           </div>
 
-          {/* hidden audio element */}
           <audio ref={audioRef} />
 
-          {/* Lirik */}
           <div style={styles.lyricsBox}>
-            <h3 style={{color:"#a855f7"}}>Lirik</h3>
             <pre style={styles.lyrics}>{current.lyrics}</pre>
           </div>
         </div>
@@ -156,19 +119,24 @@ If you want me to, I will`,
     );
   }
 
-  // Halaman daftar playlist
+  /* ================= LIST ================= */
   return (
     <div style={styles.page}>
-      <button onClick={() => navigate("/dashboard")} style={styles.navBtn}>Back</button>
-      <h2 style={styles.header}>GABISA ngomong panjang, TAPI lagu lagu ini aja yg ngasitau</h2>
+      <div style={styles.listContainer}>
+        <button onClick={() => navigate("/dashboard")} style={styles.navBtn}>
+          Back
+        </button>
 
-      <div style={styles.songList}>
-        {Object.keys(songs).map((key, i) => (
-          <div key={i} style={styles.songCard} onClick={() => setSong(key)}>
+        <h2 style={styles.header}>
+          GABISA ngomong panjang, TAPI lagu lagu ini aja yg ngasitau
+        </h2>
+
+        {Object.keys(songs).map((key) => (
+          <div key={key} style={styles.songCard} onClick={() => setSong(key)}>
             <div style={styles.songCover}>🎶</div>
             <div>
-              <h4 style={{margin:"0", color:"#7e22ce"}}>{songs[key].title}</h4>
-              <p style={{margin:"2px 0", fontSize:"13px", color:"#ec4899"}}>{songs[key].artist}</p>
+              <h4 style={styles.songTitle}>{songs[key].title}</h4>
+              <p style={styles.songArtist}>{songs[key].artist}</p>
             </div>
           </div>
         ))}
@@ -177,176 +145,159 @@ If you want me to, I will`,
   );
 }
 
-// 🎨 Styles
+/* ================= STYLES ================= */
 const styles = {
   page: {
     minHeight: "100vh",
     background: "linear-gradient(135deg,#fbcfe8,#e9d5ff)",
-    padding: "25px",
-    fontFamily: "'Press Start 2P', Poppins, sans-serif",
+    padding: "12px",
+  },
+
+  pageCenter: {
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "linear-gradient(135deg,#fbcfe8,#e9d5ff)",
+    padding: "12px",
+  },
+
+  listContainer: {
+    maxWidth: "360px",
+    margin: "0 auto",
+    display: "flex",
+    flexDirection: "column",
+    gap: "14px",
   },
 
   navBtn: {
-    padding: "12px 22px",
+    padding: "10px",
     borderRadius: "10px",
     background: "#f9a8d4",
-    color: "#7e22ce",
+    border: "3px solid #c084fc",
     fontWeight: "bold",
-    border: "4px solid #c084fc",
-    cursor: "pointer",
-    boxShadow: "4px 4px 0 #a855f7",
-    marginBottom: "20px",
   },
 
   header: {
-    marginBottom: "25px",
-    fontSize: "20px",
-    fontWeight: "bold",
-    color: "#a855f7",
+    fontSize: "14px",
     textAlign: "center",
-    textShadow: "2px 2px 0 #fbcfe8",
-  },
-
-  songList: {
-    display: "grid",
-    gridTemplateColumns: "1fr",
-    gap: "16px",
+    color: "#7e22ce",
   },
 
   songCard: {
     display: "flex",
-    alignItems: "center",
-    gap: "15px",
-    padding: "16px",
+    gap: "12px",
+    padding: "14px",
     borderRadius: "14px",
     background: "#fdf2f8",
-    border: "4px solid #e9d5ff",
-    boxShadow: "5px 5px 0 #d8b4fe",
+    border: "3px solid #e9d5ff",
+    boxShadow: "4px 4px 0 #d8b4fe",
     cursor: "pointer",
   },
 
   songCover: {
-    width: "55px",
-    height: "55px",
+    width: "48px",
+    height: "48px",
     borderRadius: "10px",
-    background: "linear-gradient(135deg,#fbcfe8,#e9d5ff)",
+    background: "#fbcfe8",
     display: "flex",
-    justifyContent: "center",
     alignItems: "center",
-    fontSize: "24px",
-    border: "3px solid #c084fc",
-    color: "#a855f7",
+    justifyContent: "center",
   },
 
+  songTitle: { margin: 0, color: "#7e22ce" },
+  songArtist: { margin: 0, fontSize: "12px", color: "#ec4899" },
+
   playerCard: {
+    width: "92%",
+    maxWidth: "320px",
+    padding: "14px",
     background: "#fdf2f8",
     borderRadius: "18px",
-    padding: "25px",
-    width: "360px",
-    margin: "auto",
-    textAlign: "center",
-    border: "5px solid #e9d5ff",
+    border: "4px solid #e9d5ff",
     boxShadow: "8px 8px 0 #d8b4fe",
+    textAlign: "center",
   },
 
   backBtn: {
-    background: "#f9a8d4",
-    border: "4px solid #c084fc",
-    borderRadius: "10px",
-    fontSize: "14px",
-    cursor: "pointer",
-    color: "#7e22ce",
-    padding: "6px 14px",
-    marginBottom: "15px",
-    boxShadow: "3px 3px 0 #a855f7",
+    marginBottom: "10px",
   },
 
   cover: {
-    width: "150px",
-    height: "150px",
-    borderRadius: "18px",
-    margin: "0 auto 20px",
-    background: "linear-gradient(135deg,#fbcfe8,#e9d5ff)",
+    width: "120px",
+    height: "120px",
+    margin: "0 auto 14px",
+    borderRadius: "16px",
+    background: "#fbcfe8",
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
-    fontSize: "48px",
-    color: "#a855f7",
-    border: "5px solid #c084fc",
+    alignItems: "center",
   },
 
-  title: {
-    fontSize: "16px",
-    fontWeight: "bold",
-    color: "#a855f7",
-    margin: "10px 0",
-  },
-
-  artist: {
-    fontSize: "12px",
-    color: "#ec4899",
-    marginBottom: "8px",
-  },
-
-  message: {
-    fontSize: "11px",
-    color: "#9333ea",
-    marginBottom: "15px",
-  },
+  title: { fontSize: "15px", color: "#7e22ce" },
+  artist: { fontSize: "12px", color: "#ec4899" },
+  message: { fontSize: "11px", marginBottom: "10px" },
 
   progressBar: {
-    height: "14px",
-    width: "100%",
-    borderRadius: "6px",
+    height: "10px",
     background: "#fce7f3",
-    marginBottom: "20px",
-    border: "3px solid #e9d5ff",
+    borderRadius: "6px",
+    overflow: "hidden",
+    marginBottom: "12px",
   },
 
   progressFill: {
     height: "100%",
     background: "linear-gradient(90deg,#f9a8d4,#c084fc)",
-    transition: "width 1s linear",
+  },
+
+  controls: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "12px",
   },
 
   lyricsBox: {
-    marginTop: "20px",
-    padding: "14px",
-    borderRadius: "12px",
-    background: "#fdf2f8",
-    border: "4px solid #fbcfe8",
-    textAlign: "left",
+    maxHeight: "120px",
+    overflowY: "auto",
+    fontSize: "11px",
   },
 
   lyrics: {
-    fontSize: "11px",
-    color: "#7e22ce",
-    margin: 0,
-    lineHeight: "1.6em",
     whiteSpace: "pre-wrap",
-    maxHeight: "120px",
-    overflowY: "auto",
   },
 };
 
+/* ================= HELPERS ================= */
+function nextSong(current, songs) {
+  const keys = Object.keys(songs);
+  return keys[(keys.indexOf(current) + 1) % keys.length];
+}
 
+function prevSong(current, songs) {
+  const keys = Object.keys(songs);
+  return keys[(keys.indexOf(current) - 1 + keys.length) % keys.length];
+}
 
-// 🎵 Tombol Neumorphism
+function togglePlay(audioRef, isPlaying, setIsPlaying) {
+  const audio = audioRef.current;
+  if (!audio) return;
+  if (isPlaying) audio.pause();
+  else audio.play();
+  setIsPlaying(!isPlaying);
+}
+
 function NeoButton({ children, big, onClick }) {
-  const size = big ? "70px" : "60px";
   return (
     <button
       onClick={onClick}
       style={{
-        width: size,
-        height: size,
-        borderRadius: "14px",
-        border: "4px solid #c084fc",
+        width: big ? "52px" : "44px",
+        height: big ? "52px" : "44px",
+        borderRadius: "12px",
+        border: "3px solid #c084fc",
         background: "#fbcfe8",
-        fontSize: "22px",
-        cursor: "pointer",
-        boxShadow: "4px 4px 0 #a855f7",
-        color: "#7e22ce",
+        fontSize: "18px",
       }}
     >
       {children}

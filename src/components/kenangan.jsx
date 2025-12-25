@@ -11,7 +11,6 @@ export default function Kenangan() {
 
   const rollRef = useRef(null);
 
-  // SOURCE FOTO (public/)
   const allPhotos = [
     "/poto1.jpeg",
     "/poto2.jpeg",
@@ -21,13 +20,11 @@ export default function Kenangan() {
     "/poto6.jpeg",
   ];
 
-  // PLAY SOUND
   const playSound = (src) => {
     const sound = new Audio(src);
     sound.play().catch(() => {});
   };
 
-  // AMBIL FOTO SATU-SATU
   const handleTakePhoto = () => {
     if (photos.length >= allPhotos.length) return;
 
@@ -39,11 +36,10 @@ export default function Kenangan() {
     setPhotos(newPhotos);
 
     if (newPhotos.length === allPhotos.length) {
-      setTimeout(() => setShowCollect(true), 1500);
+      setTimeout(() => setShowCollect(true), 1200);
     }
   };
 
-  // AUTO SCROLL FILM
   useEffect(() => {
     if (rollRef.current) {
       rollRef.current.scrollTo({
@@ -54,7 +50,7 @@ export default function Kenangan() {
   }, [photos]);
 
   return (
-    <div className="relative flex flex-col items-center min-h-screen bg-pink-100 overflow-hidden p-6">
+    <div className="relative flex flex-col items-center min-h-[100svh] bg-pink-100 overflow-hidden px-4 py-6">
 
       {/* BACK */}
       <button
@@ -66,15 +62,14 @@ export default function Kenangan() {
           rounded-xl
           border-4 border-black
           shadow-[4px_4px_0px_black]
-          transition-all
-          hover:-translate-y-1 hover:shadow-[6px_6px_0px_black]
+          active:scale-95
         "
       >
         Back
       </button>
 
       {/* JUDUL */}
-      <h2 className="text-2xl font-bold text-pink-700 mb-4">
+      <h2 className="text-lg sm:text-2xl font-bold text-pink-700 mb-4 text-center">
         Ambil foto {photos.length}/6 BABE
       </h2>
 
@@ -85,14 +80,13 @@ export default function Kenangan() {
           animate={{ opacity: 1, y: 0 }}
           onClick={() => setShowGallery(true)}
           className="
-            mb-4 px-8 py-3
+            mb-4 px-6 py-3
             bg-gradient-to-b from-purple-200 to-pink-200
             text-purple-700 font-extrabold tracking-widest
             rounded-2xl
             border-4 border-black
             shadow-[5px_5px_0px_black]
-            transition-all
-            hover:-translate-y-1 hover:shadow-[7px_7px_0px_black]
+            active:scale-95
           "
         >
           COLLECT
@@ -103,19 +97,19 @@ export default function Kenangan() {
       <div
         onClick={handleTakePhoto}
         className={`
-          relative w-64 flex flex-col items-center
+          relative flex flex-col items-center
           ${photos.length === allPhotos.length
             ? "opacity-50 cursor-not-allowed"
-            : "cursor-pointer hover:-translate-y-1 active:translate-y-1"}
+            : "cursor-pointer active:scale-95"}
         `}
       >
         <img
           src="/camera.png"
           alt="Kamera"
-          className="w-64 drop-shadow-xl"
+          className="w-40 sm:w-56 md:w-64 drop-shadow-xl"
         />
 
-        <span className="absolute -bottom-10 text-pink-700 text-sm animate-bounce">
+        <span className="mt-2 text-pink-700 text-xs sm:text-sm animate-bounce text-center">
           Klik kamera untuk ambil foto
         </span>
 
@@ -123,7 +117,12 @@ export default function Kenangan() {
         {!showGallery && (
           <div
             ref={rollRef}
-            className="absolute top-[95%] w-[220px] h-[420px] overflow-y-auto scrollbar-hide"
+            className="
+              mt-4
+              w-[180px] sm:w-[220px]
+              h-[260px] sm:h-[420px]
+              overflow-y-auto scrollbar-hide
+            "
           >
             <div className="bg-black border-4 border-black rounded-sm shadow-lg flex flex-col items-center">
               <AnimatePresence>
@@ -132,13 +131,13 @@ export default function Kenangan() {
                     key={index}
                     initial={{ y: 40, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-full h-44 border-b border-gray-700 flex items-center justify-center"
+                    transition={{ duration: 0.4 }}
+                    className="w-full h-32 sm:h-44 border-b border-gray-700 flex items-center justify-center"
                   >
                     <img
                       src={src}
                       alt={`Kenangan ${index + 1}`}
-                      className="w-[160px] h-full object-cover"
+                      className="w-[120px] sm:w-[160px] h-full object-cover"
                     />
                   </motion.div>
                 ))}
@@ -148,22 +147,31 @@ export default function Kenangan() {
         )}
       </div>
 
-      {/* GALERI – MUNCUL DARI ATAS */}
+      {/* GALERI */}
       <AnimatePresence>
         {showGallery && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-start justify-center pt-8 bg-black/40"
+            className="fixed inset-0 z-50 flex items-start justify-center pt-6 bg-black/50"
           >
             <motion.div
               initial={{ y: -40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -40, opacity: 0 }}
-              className="bg-black border-4 border-black rounded-xl p-4 max-h-[85vh] overflow-y-auto"
+              className="
+                bg-black
+                border-4 border-black
+                rounded-xl
+                p-4
+                max-h-[85svh]
+                overflow-y-auto
+                w-[90%]
+                max-w-sm
+              "
             >
-              <h2 className="text-3xl font-bold text-pink-500 text-center mb-4">
+              <h2 className="text-xl sm:text-3xl font-bold text-pink-500 text-center mb-4">
                 LUCUNYAAAA POTO KITA
               </h2>
 
@@ -173,8 +181,8 @@ export default function Kenangan() {
                   src={src}
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.15 }}
-                  className="w-[180px] mb-3 mx-auto rounded-md"
+                  transition={{ delay: i * 0.12 }}
+                  className="w-full mb-3 rounded-md"
                 />
               ))}
 
@@ -187,8 +195,7 @@ export default function Kenangan() {
                   rounded-xl
                   border-4 border-black
                   shadow-[4px_4px_0px_black]
-                  transition-all
-                  hover:-translate-y-1 hover:shadow-[6px_6px_0px_black]
+                  active:scale-95
                 "
               >
                 CLOSE

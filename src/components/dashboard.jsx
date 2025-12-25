@@ -5,7 +5,10 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
+  // Efek cursor hanya desktop
   useEffect(() => {
+    if (window.innerWidth < 768) return;
+
     const handleMouseMove = (e) => {
       setCursorPos({ x: e.clientX, y: e.clientY });
     };
@@ -14,23 +17,32 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="relative h-screen flex flex-col items-center justify-center bg-pink-100 overflow-hidden">
-      {/* Efek cahaya cursor */}
+    <div className="relative min-h-screen flex flex-col items-center justify-center px-4 bg-pink-100 overflow-hidden">
+
+      {/* Efek cahaya (desktop only) */}
       <div
-        className="pointer-events-none fixed w-40 h-40 rounded-full bg-pink-300 opacity-40 blur-3xl transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300"
+        className="hidden md:block pointer-events-none fixed w-40 h-40 rounded-full bg-pink-300 opacity-40 blur-3xl -translate-x-1/2 -translate-y-1/2 transition-all duration-300"
         style={{
-          left: `${cursorPos.x}px`,
-          top: `${cursorPos.y}px`,
+          left: cursorPos.x,
+          top: cursorPos.y,
         }}
-      ></div>
+      />
 
       {/* Judul */}
-      <h2 className="text-4xl font-extrabold text-pink-700 mb-12 text-center drop-shadow-[2px_2px_0px_#000]">
-       Tap Tap Menu
+      <h2 className="
+        text-2xl sm:text-3xl md:text-4xl
+        font-extrabold text-pink-700
+        mb-10 text-center
+        drop-shadow-[2px_2px_0px_#000]
+      ">
+        Tap Tap Menu
       </h2>
 
-      {/* Container folder */}
-      <div className="grid grid-cols-2 gap-10">
+      {/* Grid Menu */}
+      <div className="
+        grid grid-cols-2
+        gap-6 sm:gap-8 md:gap-10
+      ">
         <FolderCard
           image="/fotoDashboard.png"
           label="Foto"
@@ -63,25 +75,39 @@ export default function Dashboard() {
 function FolderCard({ image, label, onClick, color }) {
   return (
     <div
-      className="relative w-44 h-44 cursor-pointer transition-transform duration-300 hover:scale-105"
       onClick={onClick}
+      className="
+        w-32 h-32
+        sm:w-40 sm:h-40
+        md:w-44 md:h-44
+        cursor-pointer
+        transition-transform duration-200
+        active:scale-95
+      "
     >
-      {/* Folder ala Roblox */}
       <div
-        className={`w-full h-full bg-gradient-to-br ${color}
-                   border-2 border-black rounded-xl 
-                   shadow-[4px_4px_0px_black] 
-                   flex flex-col items-center justify-center 
-                   transition-all duration-300 
-                   hover:translate-y-[-6px] hover:shadow-[8px_8px_0px_black]`}
+        className={`
+          w-full h-full bg-gradient-to-br ${color}
+          border-2 border-black rounded-xl
+          shadow-[4px_4px_0px_black]
+          flex flex-col items-center justify-center
+          transition-all duration-200
+          hover:-translate-y-2 hover:shadow-[8px_8px_0px_black]
+        `}
       >
-        {/* Isi folder */}
         <img
           src={image}
           alt={label}
-          className="w-16 h-16 mb-3 transition-transform duration-300 group-hover:translate-y-1"
+          className="
+            w-12 h-12
+            sm:w-14 sm:h-14
+            md:w-16 md:h-16
+            mb-2
+          "
         />
-        <p className="text-black font-extrabold text-lg">{label}</p>
+        <p className="text-black font-extrabold text-sm sm:text-base md:text-lg">
+          {label}
+        </p>
       </div>
     </div>
   );
