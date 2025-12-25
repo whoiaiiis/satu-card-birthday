@@ -2,7 +2,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import PasswordPage from "./components/PasswordPage";
 import Page1 from "./components/page1";
 
-import Page3 from "./components/Page3";
+import Page3 from "./components/page3";
 import Page4 from "./components/page4";
 import Page5Flower from "./components/page5flower";
 import Dashboard from "./components/dashboard";
