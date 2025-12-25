@@ -14,7 +14,7 @@ export default function PhotoContainer() {
   }, []);
 
   return (
-    <div className="relative h-screen flex flex-col items-center justify-center bg-gradient-to-r from-pink-200 via-purple-300 to-pink-300 overflow-hidden">
+    <div className="relative h-screen flex fleaax-col items-center justify-center bg-gradient-to-r from-pink-200 via-purple-300 to-pink-300 overflow-hidden">
 
       {/* Efek cahaya cursor */}
       <div

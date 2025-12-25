@@ -4,42 +4,46 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Kenangan() {
   const navigate = useNavigate();
+
   const [photos, setPhotos] = useState([]);
   const [showCollect, setShowCollect] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
 
   const rollRef = useRef(null);
 
+  // SOURCE FOTO (public/)
   const allPhotos = [
-    "/foto1.jpg",
-    "/foto2.jpg",
-    "/foto3.jpg",
-    "/foto4.jpg",
-    "/foto5.jpg",
-    "/foto6.jpg",
+    "/poto1.jpeg",
+    "/poto2.jpeg",
+    "/poto3.jpeg",
+    "/poto4.jpeg",
+    "/poto5.jpeg",
+    "/poto6.jpeg",
   ];
 
-  // Suara
+  // PLAY SOUND
   const playSound = (src) => {
     const sound = new Audio(src);
     sound.play().catch(() => {});
   };
 
+  // AMBIL FOTO SATU-SATU
   const handleTakePhoto = () => {
-    if (photos.length < allPhotos.length) {
-      playSound("/sounds/camera.mp3");
-      setTimeout(() => playSound("/sounds/paper.mp3"), 400);
+    if (photos.length >= allPhotos.length) return;
 
-      const newPhotos = [...photos, allPhotos[photos.length]];
-      setPhotos(newPhotos);
+    playSound("/sounds/camera.mp3");
+    setTimeout(() => playSound("/sounds/paper.mp3"), 400);
 
-      if (newPhotos.length === allPhotos.length) {
-        setTimeout(() => setShowCollect(true), 2000);
-      }
+    const nextPhoto = allPhotos[photos.length];
+    const newPhotos = [...photos, nextPhoto];
+    setPhotos(newPhotos);
+
+    if (newPhotos.length === allPhotos.length) {
+      setTimeout(() => setShowCollect(true), 1500);
     }
   };
 
-  // Auto-scroll film roll
+  // AUTO SCROLL FILM
   useEffect(() => {
     if (rollRef.current) {
       rollRef.current.scrollTo({
@@ -50,48 +54,72 @@ export default function Kenangan() {
   }, [photos]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100 relative overflow-hidden p-6">
-      {/* Tombol kembali */}
+    <div className="relative flex flex-col items-center min-h-screen bg-pink-100 overflow-hidden p-6">
+
+      {/* BACK */}
       <button
         onClick={() => navigate("/dashboard")}
-        className="px-4 py-2 mb-6 rounded-lg bg-pink-500 text-white hover:bg-pink-600 transition z-20"
+        className="
+          px-6 py-2 mb-4
+          bg-gradient-to-b from-pink-200 to-pink-300
+          text-pink-700 font-extrabold
+          rounded-xl
+          border-4 border-black
+          shadow-[4px_4px_0px_black]
+          transition-all
+          hover:-translate-y-1 hover:shadow-[6px_6px_0px_black]
+        "
       >
-        ⬅️ Kembali
+        Back
       </button>
 
-      <h2 className="text-2xl font-bold text-pink-700 mb-6 z-20">
-        📸 Kenangan Foto Kita
+      {/* JUDUL */}
+      <h2 className="text-2xl font-bold text-pink-700 mb-4">
+        Ambil foto {photos.length}/6 BABE
       </h2>
 
-      {/* Tombol collect dipindah ke atas kamera */}
+      {/* COLLECT */}
       {showCollect && (
         <motion.button
-          initial={{ opacity: 0, y: -30 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={() => setShowGallery(true)}
-          className="mb-4 px-6 py-2 rounded-lg bg-black text-pink-400 font-bold shadow-lg hover:bg-gray-900 transition z-30"
+          className="
+            mb-4 px-8 py-3
+            bg-gradient-to-b from-purple-200 to-pink-200
+            text-purple-700 font-extrabold tracking-widest
+            rounded-2xl
+            border-4 border-black
+            shadow-[5px_5px_0px_black]
+            transition-all
+            hover:-translate-y-1 hover:shadow-[7px_7px_0px_black]
+          "
         >
           COLLECT
         </motion.button>
       )}
 
-      {/* Kamera */}
+      {/* KAMERA */}
       <div
         onClick={handleTakePhoto}
-        className="relative w-64 flex flex-col items-center justify-start cursor-pointer active:scale-95 transition z-10"
+        className={`
+          relative w-64 flex flex-col items-center
+          ${photos.length === allPhotos.length
+            ? "opacity-50 cursor-not-allowed"
+            : "cursor-pointer hover:-translate-y-1 active:translate-y-1"}
+        `}
       >
         <img
           src="/camera.png"
-          alt="Kamera Lucu"
-          className="w-64 h-auto drop-shadow-xl"
+          alt="Kamera"
+          className="w-64 drop-shadow-xl"
         />
 
-        {/* Teks petunjuk */}
         <span className="absolute -bottom-10 text-pink-700 text-sm animate-bounce">
           Klik kamera untuk ambil foto
         </span>
 
-        {/* Film roll hanya muncul jika popup belum dibuka */}
+        {/* FILM ROLL */}
         {!showGallery && (
           <div
             ref={rollRef}
@@ -102,14 +130,10 @@ export default function Kenangan() {
                 {photos.map((src, index) => (
                   <motion.div
                     key={index}
-                    initial={{ y: 50, opacity: 0 }}
+                    initial={{ y: 40, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      duration: 0.8,
-                      ease: "easeOut",
-                    }}
-                    className="relative w-full h-44 border-b border-gray-700 flex items-center justify-center bg-black"
+                    transition={{ duration: 0.5 }}
+                    className="w-full h-44 border-b border-gray-700 flex items-center justify-center"
                   >
                     <img
                       src={src}
@@ -124,74 +148,52 @@ export default function Kenangan() {
         )}
       </div>
 
-      {/* Popup Gallery tanpa overlay hitam */}
+      {/* GALERI – MUNCUL DARI ATAS */}
       <AnimatePresence>
         {showGallery && (
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.5 }}
-            className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-start justify-center pt-8 bg-black/40"
           >
-            <div className="relative pointer-events-auto">
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                className="flex flex-col items-center space-y-4"
+            <motion.div
+              initial={{ y: -40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -40, opacity: 0 }}
+              className="bg-black border-4 border-black rounded-xl p-4 max-h-[85vh] overflow-y-auto"
+            >
+              <h2 className="text-3xl font-bold text-pink-500 text-center mb-4">
+                LUCUNYAAAA POTO KITA
+              </h2>
+
+              {photos.map((src, i) => (
+                <motion.img
+                  key={i}
+                  src={src}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: i * 0.15 }}
+                  className="w-[180px] mb-3 mx-auto rounded-md"
+                />
+              ))}
+
+              <button
+                onClick={() => setShowGallery(false)}
+                className="
+                  mt-4 w-full px-6 py-2
+                  bg-gradient-to-b from-pink-200 to-pink-300
+                  text-pink-700 font-extrabold
+                  rounded-xl
+                  border-4 border-black
+                  shadow-[4px_4px_0px_black]
+                  transition-all
+                  hover:-translate-y-1 hover:shadow-[6px_6px_0px_black]
+                "
               >
-                <h2 className="text-3xl font-bold text-pink-600 mb-4 text-center drop-shadow-lg">
-                  ✨ Galeri Kenangan ✨
-                </h2>
-
-                {/* Polaroid panjang seperti roll */}
-                <div className="bg-black border-4 border-black rounded-sm shadow-2xl flex flex-col items-center p-4 max-h-[80vh] overflow-y-auto">
-                  {photos.map((src, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ y: 50, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: i * 0.2 }}
-                      className="relative w-[220px] h-44 border-b border-gray-700 flex items-center justify-center bg-black mb-2"
-                    >
-                      <img
-                        src={src}
-                        alt={`Galeri ${i + 1}`}
-                        className="w-[160px] h-full object-cover"
-                      />
-
-                      {/* Dot kiri */}
-                      {[2, 10, 20, 36].map((pos, idx) => (
-                        <div
-                          key={`left-${i}-${idx}`}
-                          style={{ top: pos }}
-                          className="absolute left-1 w-2 h-2 bg-white rounded-full"
-                        />
-                      ))}
-
-                      {/* Dot kanan */}
-                      {[2, 10, 20, 36].map((pos, idx) => (
-                        <div
-                          key={`right-${i}-${idx}`}
-                          style={{ top: pos }}
-                          className="absolute right-1 w-2 h-2 bg-white rounded-full"
-                        />
-                      ))}
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Tombol Tutup */}
-                <button
-                  onClick={() => setShowGallery(false)}
-                  className="mt-4 px-6 py-2 rounded-lg bg-pink-500 text-white font-bold hover:bg-pink-600 transition"
-                >
-                  ❌ Tutup
-                </button>
-              </motion.div>
-            </div>
+                CLOSE
+              </button>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

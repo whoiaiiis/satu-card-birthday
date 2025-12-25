@@ -9,7 +9,7 @@ export default function Page4({ onNext }) {
   }, []);
 
   return (
-    <div className="relative flex justify-center items-center h-screen overflow-hidden bg-gradient-to-b from-pink-50 to-white">
+    <div className="relative flex justify-center items-center h-screen overflow-hidden bg-gradient-to-br from-pink-200 via-pink-100 to-pink-300">
       {/* Background hearts ❤️ */}
       {Array.from({ length: 20 }).map((_, i) => (
         <span
@@ -30,7 +30,7 @@ export default function Page4({ onNext }) {
 
       {/* Card hadiah 🎁 */}
       <div
-        className={`bg-white p-8 rounded-2xl shadow-xl w-80 text-center z-10 transform transition-all duration-700 ${
+        className={`bg-gradient-to-br from-pink-200 via-pink-100 to-pink-300 p-8 rounded-2xl w-80 text-center z-10 transform transition-all duration-700 border-4 border-black shadow-[6px_6px_0px_black] hover:translate-y-[-6px] hover:shadow-[8px_8px_0px_black] ${
           showCard ? "opacity-100 scale-100" : "opacity-0 scale-90"
         }`}
       >
@@ -41,16 +41,15 @@ export default function Page4({ onNext }) {
           style={{ maxWidth: "200px" }}
         />
 
-        <p className="text-pink-600 text-lg font-medium mb-6">
-          Dan ada hadiah lagi... ✨ klik di bawah untuk lihat Bunga spesial
-          💕
+        <p className="text-black text-lg font-extrabold mb-6 border-2 border-black bg-white p-3 rounded-xl shadow-[3px_3px_0px_black]">
+          Klik kalo mau liat bunga secantik aku hihi
         </p>
 
         <button
-          className="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition transform hover:scale-105"
+          className="bg-gradient-to-br from-pink-500 to-pink-400 hover:from-pink-400 hover:to-pink-300 text-white font-extrabold px-6 py-3 rounded-full transition transform hover:translate-y-[-3px] border-3 border-black shadow-[5px_5px_0px_black] hover:shadow-[7px_7px_0px_black]"
           onClick={onNext}
         >
-          Lihat Bunga 🎁
+          LIHAT DENGAN EXCITED
         </button>
       </div>
     </div>

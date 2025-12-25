@@ -12,8 +12,9 @@ export default function Page2({ onNext }) {
   }, [isOpen]);
 
   return (
-    <div className="relative flex justify-center items-center h-screen overflow-hidden bg-gradient-to-b from-pink-50 to-white">
-      {/* ❤️ Background hearts (berdetak) */}
+    <div className="relative flex justify-center items-center h-screen overflow-hidden bg-gradient-to-br from-pink-200 via-pink-100 to-pink-300">
+
+      {/* ❤️ Background hearts */}
       {Array.from({ length: 25 }).map((_, i) => (
         <span
           key={i}
@@ -33,54 +34,64 @@ export default function Page2({ onNext }) {
 
       {/* 📩 Amplop */}
       <div className="relative w-64 h-48">
-        {/* Bagian belakang amplop */}
-        <div className="absolute inset-0 bg-pink-200 rounded-b-lg shadow-lg"></div>
 
-        {/* Tutup amplop */}
-        <div
-          className={`absolute top-0 left-0 w-full h-1/2 bg-pink-300 transform origin-top transition-transform duration-1000 ease-in-out ${
-            isOpen ? "rotate-x-180" : ""
-          }`}
-          style={{
-            clipPath: "polygon(0 0, 100% 0, 50% 100%)",
-          }}
-        ></div>
+        {/* Back envelope */}
+        <div className="absolute inset-0 bg-gradient-to-br from-pink-300 to-pink-200 rounded-xl border-3 border-black shadow-[4px_4px_0px_black]" />
 
-        {/* Isi amplop (konten muncul setelah terbuka) */}
+        {/* Envelope flap */}
         <div
-          className={`absolute inset-0 flex flex-col justify-center items-center transition-all duration-700 ${
+          className={`absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-pink-500 to-pink-400
+          transform origin-top transition-transform duration-1000 ease-in-out
+          border-b-4 border-l-4 border-r-4 border-black
+          shadow-[6px_6px_0px_black]
+          ${isOpen ? "rotate-x-180" : ""}`}
+          style={{ clipPath: "polygon(0 0, 100% 0, 50% 100%)" }}
+        />
+
+        {/* ✨ Envelope content */}
+        <div
+          className={`absolute inset-0 flex flex-col items-center px-4 py-5 transition-all duration-700 ${
             showContent
               ? "opacity-100 scale-100 translate-y-0"
               : "opacity-0 scale-75 translate-y-10"
           }`}
         >
+          {/* Image */}
           <img
             src="/satuCardPage2.png"
             alt="Sayang.."
-            className="mx-auto drop-shadow-md mb-4"
-            style={{ maxWidth: "180px" }}
+            className="mx-auto drop-shadow-md mb-3"
+            style={{ maxWidth: "160px" }}
           />
 
-          <p className="text-pink-600 text-lg font-medium mb-4">
-            Aku sayang kamu heheheh 🎉
+          {/* Text */}
+          <p className="text-black text-base font-extrabold border-2 border-black bg-white px-3 py-2 rounded-xl shadow-[3px_3px_0px_black] text-center mb-2">
+            Hallo, babe... (灬º‿º灬)♡
           </p>
 
+          {/* ✅ Next button pushed down */}
           <button
-            className="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition transform hover:scale-105"
             onClick={onNext}
+            className="mt-auto bg-gradient-to-br from-pink-500 to-pink-400
+            hover:from-pink-400 hover:to-pink-300
+            text-white font-extrabold px-6 py-3 rounded-full transition
+            border-3 border-black shadow-[5px_5px_0px_black]"
           >
             next 💌
           </button>
         </div>
       </div>
 
-      {/* Tombol buka amplop */}
+      {/* 🔓 Open envelope button */}
       {!isOpen && (
         <button
-          className="absolute bottom-12 bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full shadow-md transition transform hover:scale-105"
           onClick={() => setIsOpen(true)}
+          className="absolute bottom-12 bg-gradient-to-br from-pink-500 to-pink-400
+          hover:from-pink-400 hover:to-pink-300
+          text-white font-extrabold px-6 py-3 rounded-full transition
+          border-3 border-black shadow-[5px_5px_0px_black]"
         >
-          Open Envelope 💖
+          Open Envelope
         </button>
       )}
     </div>
